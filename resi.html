@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="style.css"/>
+    <script>
+        feather.replace();
+      </script>
+    <title>Konfirmasi Pesanan</title>
+    <style>
+        .order-confirm-body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .order-confirm-container {
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 1100px;
+            padding: 20px;
+            display: flex;
+            flex-direction: row;
+            margin-top: 5%;
+        }
+        
+        .order-confirm-left-side {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-right: 1px solid #e9ecef;
+        }
+        
+        .order-confirm-right-side {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .order-confirm-success-icon {
+            color: #28a745;
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        
+        .order-confirm-h1 {
+            color: #343a40;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .order-confirm-p {
+            color: #6c757d;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .order-confirm-details {
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .order-confirm-details .order-confirm-p {
+            margin: 8px 0;
+        }
+        
+        .order-confirm-detail-label {
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .order-confirm-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .order-confirm-btn:hover {
+            background-color: #0069d9;
+        }
+        
+        .order-confirm-footer {
+            margin-top: 40px;
+            color: #adb5bd;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body class="order-confirm-body">
+    <nav class="navbar">
+        <a href="#" class="navbar-logo">Gawai <span>Nusantara</span> </a>
+        <div class="navbar-nav">
+          <a href="index.html"><img src="Apple_logo_white.svg.png" style="width: 15px;" height="auto" class="apple_icon"></a>
+          <a href="mac.html">Mac</a>
+          <a href="ipad.html">iPad</a>
+          <a href="iphone.html">iPhone</a>
+          <a href="watch.html">Watch</a>
+          <a href="airpods.html">Airpods</a>
+          <a href="tentangkami.html">Tentang Kami</a>
+          <a href="tentangkami.html">Kontak Kami</a>
+          
+        </div>
+        <div class="navbar-extra">
+          <div class="navbar-extra">
+            
+            <a href="checkout.html" id="shopping-cart-button"><i data-feather="shopping-cart"></i></a>
+            <a href="#" id="menu"><i data-feather="menu"></i></a>
+          </div>
+        </div>
+        <!-- Search -->
+        <div class="search-form">
+          <input type="search" id="search-box" placeholder="search here...">
+          <label for="search-box"><i data-feather="search"></i></label>
+         </div>
+        </div>
+      </nav>
+    <div class="order-confirm-container">
+        <div class="order-confirm-left-side">
+            <div class="order-confirm-success-icon">✓</div>
+            <h1 class="order-confirm-h1">Pesanan Anda Telah Berhasil</h1>
+            <p class="order-confirm-p">Terima kasih telah melakukan pemesanan. Detail pesanan Anda telah kami terima dan sedang diproses.</p>
+
+            
+            <a href="index.html" class="order-confirm-btn">Beranda</a>
+        </div>
+        
+        <div class="order-confirm-right-side">
+            <div class="order-confirm-details">
+                <p class="order-confirm-p"><span class="order-confirm-detail-label">Nomor Pesanan:</span> <span id="orderConfirmNumber"></span></p>
+                <p class="order-confirm-p"><span class="order-confirm-detail-label">Tanggal:</span> <span id="orderConfirmDate"></span></p>
+                <p class="order-confirm-p"><span class="order-confirm-detail-label">Waktu Pemesanan:</span> <span id="orderConfirmTime"></span></p>
+                <p class="order-confirm-p"><span class="order-confirm-detail-label">Status:</span> Sedang Diproses</p>
+            </div>
+            
+            <div class="order-confirm-footer">
+                <p class="order-confirm-p">Jika Anda memiliki pertanyaan, silakan hubungi layanan pelanggan kami.</p>
+                <p class="order-confirm-p">&copy; <span id="orderConfirmCurrentYear"></span> Gawai Nusantara. Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk menghasilkan nomor pesanan acak
+        function generateOrderConfirmNumber() {
+            const prefix = "ORD";
+            const randomDigits = Math.floor(10000000 + Math.random() * 90000000);
+            return `#${prefix}${randomDigits}`;
+        }
+
+        // Fungsi untuk memformat tanggal dalam format Indonesia
+        function formatOrderConfirmDate(date) {
+            const options = { 
+                day: 'numeric', 
+                month: 'long', 
+                year: 'numeric' 
+            };
+            return date.toLocaleDateString('id-ID', options);
+        }
+        
+        // Fungsi untuk memformat waktu pemesanan
+        function formatOrderConfirmTime(date) {
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+            
+            return `${hours}:${minutes}:${seconds} WIB`;
+        }
+        
+
+
+        // Mengisi informasi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mendapatkan tanggal saat ini
+            const today = new Date();
+            
+            // Mengisi nomor pesanan
+            document.getElementById('orderConfirmNumber').textContent = generateOrderConfirmNumber();
+            
+            // Mengisi tanggal pesanan
+            document.getElementById('orderConfirmDate').textContent = formatOrderConfirmDate(today);
+            
+            // Mengisi waktu pemesanan
+            document.getElementById('orderConfirmTime').textContent = formatOrderConfirmTime(today);
+            
+            // Mengisi tahun saat ini untuk copyright
+            document.getElementById('orderConfirmCurrentYear').textContent = today.getFullYear();
+            
+
+        });
+    </script>
+</body>
+</html>
